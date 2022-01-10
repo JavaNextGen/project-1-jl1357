@@ -3,9 +3,11 @@ package com.revature.services;
 import com.revature.models.Reimbursement;
 import com.revature.models.Status;
 import com.revature.models.User;
+import com.revature.repositories.ReimbursementDAO;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The ReimbursementService should handle the submission, processing,
@@ -40,14 +42,28 @@ public class ReimbursementService {
      * The Resolver should be null. Additional fields may be null.
      * After processing, the reimbursement will have its status changed to either APPROVED or DENIED.
      */
+	ReimbursementDAO rDAO = new ReimbursementDAO();
+	public Optional<Reimbursement> getById(int Idinput) {
+		Optional<Reimbursement> reimb=rDAO.getById(Idinput);
+		return reimb;
+	}
+	public Reimbursement getById2(int Idinput) {
+		Reimbursement reimb=rDAO.getById2(Idinput);
+		return reimb;
+	}
     public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
+    	Reimbursement reimb=rDAO.update(unprocessedReimbursement,finalStatus,resolver);
         return null;
     }
-
+//    public Reimbursement update(Reimbursement unprocessedReimbursement) {
+//    	Reimbursement reimb=rDAO.update(unprocessedReimbursement);
+//        return null;
+//    }
     /**
      * Should retrieve all reimbursements with the correct status.
      */
     public List<Reimbursement> getReimbursementsByStatus(Status status) {
-        return Collections.emptyList();
+    	List<Reimbursement> reimbstatus = rDAO.getByStatus(status);
+        return reimbstatus;
     }
 }
