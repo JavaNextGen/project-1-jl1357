@@ -15,7 +15,7 @@ public class UserController {
 	ReimbursementService rs = new ReimbursementService();
 	public Handler getUserByIdController = (ctx) -> {
 		int id = 0;
-		id = Integer.parseInt(ctx.pathParam("user_id"));
+		id = Integer.parseInt(ctx.pathParam("reimb_id"));
 		if(ctx.req.getSession() != null) {
 			User userresult = us.getbyUserid(id);
 			//System.out.println(userresult);

@@ -27,13 +27,20 @@ public class Driver {
 					config.enableCorsForAllOrigins(); // allows the server to process JS requests from anywhere
 				}
 			).start(3001);
-    	
+    	//get user by id
     	app.get("/user/{user_id}", uc.getUserByIdController);
+    	//create new user
     	app.post("/user", uc.updateNewUser);
-    	app.get("/reimb/{user_id}", rc.getReimbByIdController);
+    	//get reimb by id
+    	app.get("/reimb/{reimb_id}", rc.getReimbByIdController);
+    	//get all reimb belongs to user 
     	app.get("/reimbforuser/{user_id}", uc.getAllReimbUser);
+    	//add new reimb
     	app.post("/reimb/create", rc.addNewReimb);
+    	//get all reimb
     	app.get("/reimball", rc.getAllReimbController);
+    	//filter reimb by status
+    	//1 approved, 2 pending, 3 denied
     	app.get("/reimbfilter/{reimb_status_id}", rc.getByStatsController);
     	
     }
