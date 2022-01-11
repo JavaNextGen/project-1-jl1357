@@ -18,10 +18,10 @@ public class Driver {
 			System.out.println("Connection failed");
 			e.printStackTrace();
 		}
-    	/*
-    	Menu menu = new Menu();
-    	menu.displayMenu();
-		*/
+//    	
+//    	Menu menu = new Menu();
+//    	menu.displayMenu();
+//		
     	Javalin app = Javalin.create(
 				config -> {
 					config.enableCorsForAllOrigins(); // allows the server to process JS requests from anywhere
@@ -31,5 +31,8 @@ public class Driver {
     	app.get("/user/{user_id}", uc.getUserByIdController);
     	app.post("/user", uc.updateNewUser);
     	app.get("/reimb/{user_id}", rc.getReimbByIdController);
+    	app.get("/reimbforuser/{user_id}", uc.getAllReimbUser);
+    	app.post("/reimb/create", rc.addNewReimb);
+    	app.get("/reimball", rc.getAllReimbController);
     }
 }

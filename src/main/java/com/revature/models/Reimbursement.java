@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
+
 /**
  * This concrete Reimbursement class can include additional fields that can be used for
  * extended functionality of the ERS application.
@@ -17,8 +19,9 @@ public class Reimbursement extends AbstractReimbursement {
 //public class Reimbursement {
 	//private int reimb_id;
 	//private int reimb_amount;
-	private String submitted;
-	private String resolved;
+//	private Timestamp submitted;
+//	private Timestamp abc;
+//	private Timestamp resolved;
 	private String reimb_description;
 	private int ers_users_fk_auth;
 	private int ers_users_fk_reslver;
@@ -27,10 +30,10 @@ public class Reimbursement extends AbstractReimbursement {
 	
    
 
-	public Reimbursement(int id, Status status, User author, User resolver, double amount,String submitted, String resolved, String reimb_description, int ers_users_fk_auth, int ers_users_fk_reslver,int ers_reimb_status_fk,int ers_reimb_type_fk) {
+	public Reimbursement(int id, Status status, User author, User resolver, double amount,/*Timestamp submitted, Timestamp resolved,*/ String reimb_description, int ers_users_fk_auth, int ers_users_fk_reslver,int ers_reimb_status_fk,int ers_reimb_type_fk) {
 		super(id,status,author,resolver,amount);
-		this.submitted = submitted;
-		this.resolved = resolved;
+//		this.submitted = submitted;
+//		this.resolved = resolved;
 		this.reimb_description = reimb_description;
 		this.ers_users_fk_auth = ers_users_fk_auth;
 		this.ers_users_fk_reslver = ers_users_fk_reslver;
@@ -52,21 +55,21 @@ public class Reimbursement extends AbstractReimbursement {
 		this.ers_reimb_type_fk = ers_reimb_type_fk;
 	}*/
 
-	public String getSubmitted() {
-		return submitted;
-	}
-
-	public void setSubmitted(String submitted) {
-		this.submitted = submitted;
-	}
-
-	public String getResolved() {
-		return resolved;
-	}
-
-	public void setResolved(String resolved) {
-		this.resolved = resolved;
-	}
+//	public Timestamp getSubmitted() {
+//		return submitted;
+//	}
+//
+//	public void setSubmitted(Timestamp submitted) {
+//		this.submitted = submitted;
+//	}
+//
+//	public Timestamp getResolved() {
+//		return resolved;
+//	}
+//
+//	public void setResolved(Timestamp resolved) {
+//		this.resolved = resolved;
+//	}
 
 	public String getReimb_description() {
 		return reimb_description;
@@ -110,7 +113,7 @@ public class Reimbursement extends AbstractReimbursement {
 
 	@Override
 	public String toString() {
-		return "Reimbursement [submitted=" + submitted + ", resolved=" + resolved + ", reimb_description="
+		return "Reimbursement [reimb_description="
 				+ reimb_description + ", ers_users_fk_auth=" + ers_users_fk_auth + ", ers_users_fk_reslver="
 				+ ers_users_fk_reslver + ", ers_reimb_status_fk=" + ers_reimb_status_fk + ", ers_reimb_type_fk="
 				+ ers_reimb_type_fk + "]";

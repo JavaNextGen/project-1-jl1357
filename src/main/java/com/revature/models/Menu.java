@@ -197,6 +197,27 @@ public class Menu {
 				
 				break;
 			}
+			case "7" :{
+				System.out.println("What user id would you like to search for?");
+				
+				int idInput = scan.nextInt();
+				scan.nextLine();//get user's input for id
+				 //we still need nextLine so that we can move to the next line for more input
+				
+				//what if the user inputs a String? program crashes
+				//up to you to polish your project a bit and add some foolproofing mechanisms
+				
+				//List<Employee> employees = es.getEmployeeById(idInput);
+				List<Reimbursement> ReimbursementList = rs.getAllReimbUser(idInput);
+				for(Reimbursement r : ReimbursementList)
+				{
+					System.out.println(r); //print them out one by one via the enhanced for loop
+				}
+	                                                                  			
+			
+				
+				break;
+			}
 			/*case "employeebytitle": {
 				
 			System.out.println("Enter Employee Role to Search: (Case Sensitive! e.g. \"Fry Cook\")");

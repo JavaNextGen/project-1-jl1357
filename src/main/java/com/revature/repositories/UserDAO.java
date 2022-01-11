@@ -45,7 +45,7 @@ public class UserDAO {
     			//System.out.println(rs.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
     			Optional<User> useroptional = Optional.ofNullable(nu);
-    			System.out.println(useroptional);
+    			//System.out.println(useroptional);
     			return useroptional;
     		}
     		//System.out.println(rs);
@@ -86,7 +86,7 @@ public class UserDAO {
     			//System.out.println(rs.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
     			resultuser=nu;
-    			System.out.println(nu);
+    			//System.out.println(nu);
     			
     		}
     		return resultuser;
@@ -147,7 +147,7 @@ public class UserDAO {
     					);
     			//System.out.println(rs.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
-    			System.out.println(userToBeRegistered);
+    			//System.out.println(userToBeRegistered);
     			
     			return userToBeRegistered;
     		}
