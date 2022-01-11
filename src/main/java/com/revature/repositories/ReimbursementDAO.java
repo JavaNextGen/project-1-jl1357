@@ -234,7 +234,7 @@ public class ReimbursementDAO {
     	try(Connection conn = ConnectionFactory.getConnection()){
     		ResultSet rs= null;
     		
-    		String sql = "SELECT * FROM ers_reimb INNER JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id WHERE ers_reimb_status.reimb_status = ?;";
+    		String sql = "SELECT * FROM ers_reimb LEFT JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id WHERE ers_reimb_status.reimb_status = ?;";
     		PreparedStatement ps = conn.prepareStatement(sql);
     		ps.setString(1, status.toString());
     		rs=ps.executeQuery();
@@ -244,12 +244,12 @@ public class ReimbursementDAO {
     		while(rs.next()) {
     			
     			ResultSet rs2= null;
-    			String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
+    			String sqlauth = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
     			PreparedStatement ps2 = conn.prepareStatement(sqlauth);
     			ps2.setInt(1, rs.getInt("reimb_id"));
     			rs2=ps2.executeQuery();
     			ResultSet rs3= null;
-    			String sqlresl = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk WHERE ers_reimb.reimb_id =?";
+    			String sqlresl = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk WHERE ers_reimb.reimb_id =?";
     			PreparedStatement ps3 = conn.prepareStatement(sqlresl);
     			ps3.setInt(1, rs.getInt("reimb_id"));
     			rs3=ps3.executeQuery();

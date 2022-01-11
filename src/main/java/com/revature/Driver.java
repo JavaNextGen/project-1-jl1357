@@ -18,7 +18,7 @@ public class Driver {
 			System.out.println("Connection failed");
 			e.printStackTrace();
 		}
-//    	
+    	
 //    	Menu menu = new Menu();
 //    	menu.displayMenu();
 //		
@@ -34,5 +34,7 @@ public class Driver {
     	app.get("/reimbforuser/{user_id}", uc.getAllReimbUser);
     	app.post("/reimb/create", rc.addNewReimb);
     	app.get("/reimball", rc.getAllReimbController);
+    	app.get("/reimbfilter/{reimb_status_id}", rc.getByStatsController);
+    	
     }
 }
