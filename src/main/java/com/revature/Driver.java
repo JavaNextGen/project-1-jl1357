@@ -40,12 +40,13 @@ public class Driver {
     	//get all reimb belongs to user 
     	app.get("/reimbforuser/{user_id}", uc.getAllReimbUser);
     	//add new reimb
-    	app.post("/reimb/create", rc.addNewReimb);
+    	app.post("/reimbcreate", rc.addNewReimb);
     	//get all reimb
     	app.get("/reimball", rc.getAllReimbController);
     	//filter reimb by status
     	//1 approved, 2 pending, 3 denied
     	app.get("/reimbfilter/{reimb_status_id}", rc.getByStatsController);
     	app.post("/login",ac.loginHandler);
+    	
     }
 }

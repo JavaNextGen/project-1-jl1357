@@ -378,7 +378,7 @@ public class ReimbursementDAO {
     public Reimbursement createReimb(Reimbursement unprocessedReimbursement) {
 	try(Connection conn = ConnectionFactory.getConnection()){
 		
-		//ResultSet rs= null;
+		
 		String sql = "INSERT INTO ers_reimb(reimb_id, reimb_amount,reimb_description,ers_users_fk_auth,ers_reimb_status_fk,ers_reimb_type_fk) VALUES (?,?,?,?,?,?);";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, unprocessedReimbursement.getId());
@@ -390,7 +390,6 @@ public class ReimbursementDAO {
 		ps.setInt(5, unprocessedReimbursement.getErs_reimb_status_fk());
 		ps.setInt(6, unprocessedReimbursement.getErs_reimb_type_fk());
 		ps.executeUpdate();
-			
 		
 
 		

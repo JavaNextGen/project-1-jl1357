@@ -116,10 +116,11 @@ public class UserDAO {
     public User create(User userToBeRegistered) {
     	try(Connection conn = ConnectionFactory.getConnection()){
     		//System.out.println("ur here");
-    		ResultSet rs= null;
+    		
     		String sql = "INSERT INTO ers_users(user_id, username,PASSWORD,user_lname,user_fname,user_email,role_id_fk) VALUES (?,?,?,?,?,?,?)";
     		PreparedStatement ps = conn.prepareStatement(sql);
     		ps.setInt(1, userToBeRegistered.getId());
+    		//System.out.println(userToBeRegistered.getId());
     		ps.setString(2, userToBeRegistered.getUsername());
     		ps.setString(3, userToBeRegistered.getPassword());
     		ps.setString(4, userToBeRegistered.getUser_lname());
@@ -148,9 +149,9 @@ public class UserDAO {
     						rs2.getString("user_email"),
     						rs2.getInt("role_id_fk")
     					);
-    			//System.out.println(rs.getInt("user_id"));
+    			//System.out.println(rs2.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
-    			//System.out.println(userToBeRegistered);
+    			System.out.println(userToBeRegistered);
     			
     			return userToBeRegistered;
     		}

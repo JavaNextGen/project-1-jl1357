@@ -55,21 +55,17 @@ public class Reimbursement extends AbstractReimbursement {
 		this.ers_reimb_type_fk = ers_reimb_type_fk;
 	}*/
 
-//	public Timestamp getSubmitted() {
-//		return submitted;
-//	}
-//
-//	public void setSubmitted(Timestamp submitted) {
-//		this.submitted = submitted;
-//	}
-//
-//	public Timestamp getResolved() {
-//		return resolved;
-//	}
-//
-//	public void setResolved(Timestamp resolved) {
-//		this.resolved = resolved;
-//	}
+
+	public Reimbursement() {
+        super();
+    }
+
+    @Override
+	public String toString() {
+		return "Reimbursement [reimb_description=" + reimb_description + ", ers_users_fk_auth=" + ers_users_fk_auth
+				+ ", ers_users_fk_reslver=" + ers_users_fk_reslver + ", ers_reimb_status_fk=" + ers_reimb_status_fk
+				+ ", ers_reimb_type_fk=" + ers_reimb_type_fk + "]";
+	}
 
 	public String getReimb_description() {
 		return reimb_description;
@@ -111,19 +107,7 @@ public class Reimbursement extends AbstractReimbursement {
 		this.ers_reimb_type_fk = ers_reimb_type_fk;
 	}
 
-	@Override
-	public String toString() {
-		return "Reimbursement [reimb_description="
-				+ reimb_description + ", ers_users_fk_auth=" + ers_users_fk_auth + ", ers_users_fk_reslver="
-				+ ers_users_fk_reslver + ", ers_reimb_status_fk=" + ers_reimb_status_fk + ", ers_reimb_type_fk="
-				+ ers_reimb_type_fk + "]";
-	}
-
-	public Reimbursement() {
-        super();
-    }
-
-    /**
+	/**
      * This includes the minimum parameters needed for the {@link com.revature.models.AbstractReimbursement} class.
      * If other fields are needed, please create additional constructors.
      */

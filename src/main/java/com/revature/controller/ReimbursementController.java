@@ -37,7 +37,7 @@ public Handler addNewReimb = (ctx) -> {
 			Gson gson = new Gson();
 			Reimbursement reimb = gson.fromJson(body, Reimbursement.class);
 			rs.createReimb(reimb);
-			ctx.result("created user");
+			ctx.result("created reimb");
 			ctx.status(200);
 		}else {
 			ctx.result("failed");
