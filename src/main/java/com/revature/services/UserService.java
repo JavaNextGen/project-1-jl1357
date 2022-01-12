@@ -34,11 +34,14 @@ public class UserService {
 		User user1=uDAO.getbyUserid(idinput);
 		return user1;
 	}
-	public boolean uniquechecker(String username){
-		return uDAO.uniquechecker(username);
+	public boolean usernamechecker(String username){
+		return uDAO.usernamechecker(username);
 	}
 	public User create(User userToBeRegistered) {
 		User usertocreate=uDAO.create(userToBeRegistered);
 		return usertocreate;
+	}
+	public User getbyusername(String username){
+		return uDAO.getbyusername(username);
 	}
 }

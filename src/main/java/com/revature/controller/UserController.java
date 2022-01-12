@@ -15,7 +15,7 @@ public class UserController {
 	ReimbursementService rs = new ReimbursementService();
 	public Handler getUserByIdController = (ctx) -> {
 		int id = 0;
-		id = Integer.parseInt(ctx.pathParam("reimb_id"));
+		id = Integer.parseInt(ctx.pathParam("user_id"));
 		if(ctx.req.getSession() != null) {
 			User userresult = us.getbyUserid(id);
 			//System.out.println(userresult);
@@ -55,6 +55,23 @@ public class UserController {
 			//System.out.println(userresult);
 			Gson gson = new Gson();
 			String JSONUser = gson.toJson(reimblist);
+			
+			ctx.result(JSONUser);
+			ctx.status(200);
+		}else {
+			ctx.result("failed");
+			ctx.status(404);
+		}
+		
+	};
+	public Handler getuserbyusername = (ctx) -> {
+		String username = null;
+		username = ctx.pathParam("username");
+		if(ctx.req.getSession() != null) {
+			User user = us.getbyusername(username);
+			//System.out.println(userresult);
+			Gson gson = new Gson();
+			String JSONUser = gson.toJson(user);
 			
 			ctx.result(JSONUser);
 			ctx.status(200);

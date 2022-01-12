@@ -15,7 +15,7 @@ public class ReimbursementController {
 	ReimbursementService rs = new ReimbursementService();
 	public Handler getReimbByIdController = (ctx) -> {
 		int id = 0;
-		id = Integer.parseInt(ctx.pathParam("user_id"));
+		id = Integer.parseInt(ctx.pathParam("reimb_id"));
 		if(ctx.req.getSession() != null) {
 			Optional<Reimbursement> reimbresult = rs.getById(id);
 			Gson gson = new Gson();

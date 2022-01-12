@@ -47,12 +47,12 @@ public class ReimbursementDAO {
     		
     		
     		while(rs.next()&rs2.next()&rs3.next()) {
-    			if(rs3.getString("reimb_status")=="Approved") {
+    			if(rs3.getString("reimb_status").equals("Approved")) {
     				
    					reimbStatus = Status.APPROVED;
     			}
     			
-    			else if(rs3.getString("reimb_status")=="Denied") {
+    			else if(rs3.getString("reimb_status").equals("Denied")) {
     				reimbStatus = Status.DENIED;
     			}
     			
@@ -108,12 +108,12 @@ public class ReimbursementDAO {
     		while(rs.next()&rs2.next()&rs3.next()) {
     			
     			Status reimbStatus = Status.PENDING;
-    			if(rs3.getString("reimb_status")=="Approved") {
+    			if(rs3.getString("reimb_status").equals("Approved")) {
     				
    					reimbStatus = Status.APPROVED;
     			}
     			
-    			else if(rs3.getString("reimb_status")=="Denied") {
+    			else if(rs3.getString("reimb_status").equals("Denied")) {
     				reimbStatus = Status.DENIED;
     			}
     			//System.out.println("ur here");
@@ -171,12 +171,12 @@ public class ReimbursementDAO {
     		while(rs.next()&rs2.next()&rs3.next()) {
     			
     			Status reimbStatus = Status.PENDING;
-    			if(rs3.getString("reimb_status")=="Approved") {
+    			if(rs3.getString("reimb_status").equals("Approved")) {
     				
    					reimbStatus = Status.APPROVED;
     			}
     			
-    			else if(rs3.getString("reimb_status")=="Denied") {
+    			else if(rs3.getString("reimb_status").equals("Denied")) {
     				reimbStatus = Status.DENIED;
     			}
     			User auth = us.getbyUserid(rs.getInt("user_id"));
@@ -300,13 +300,13 @@ public class ReimbursementDAO {
     		int id = unprocessedReimbursement.getId();
     		int reslvr = unprocessedReimbursement.getErs_users_fk_reslver();
     		int stat=1;
-    		if (finalStatus.toString()=="Pending") {
+    		if (finalStatus.toString().equals("Pending")) {
     			stat=1;
     		}
-    		else if (finalStatus.toString()=="Approved") {
+    		else if (finalStatus.toString().equals("Approved")) {
     			stat=2;
     		}
-    		else if (finalStatus.toString()=="Denied") {
+    		else if (finalStatus.toString().equals("Denied")) {
     			stat=3;
     		}
     		
@@ -419,12 +419,12 @@ public class ReimbursementDAO {
     		while(rs.next()&rs2.next()&rs3.next()) {
     			
     			Status reimbStatus = Status.PENDING;
-    			if(rs3.getString("reimb_status")=="Approved") {
+    			if(rs3.getString("reimb_status").equals("Approved")) {
     				
    					reimbStatus = Status.APPROVED;
     			}
     			
-    			else if(rs3.getString("reimb_status")=="Denied") {
+    			else if(rs3.getString("reimb_status").equals("Denied")) {
     				reimbStatus = Status.DENIED;
     			}
     			User auth = us.getbyUserid(rs.getInt("user_id"));

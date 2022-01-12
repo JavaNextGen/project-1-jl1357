@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.models.User;
+import com.revature.repositories.UserDAO;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ import java.util.Optional;
  * </ul>
  */
 public class AuthService {
-
+	
     /**
      * <ul>
      *     <li>Needs to check for existing users with username/email provided.</li>
@@ -27,7 +28,13 @@ public class AuthService {
      *     <li>Must return user object if the user logs in successfully.</li>
      * </ul>
      */
+	UserDAO uDAO= new UserDAO();
     public User login(String username, String password) {
+    	User loginuser= uDAO.loginDAO(username, password);
+    	//System.out.println("in authservice"+loginuser);
+    	if((loginuser.getUsername() != null) &(loginuser.getPassword() != null) ) {
+    		return loginuser;
+    	}
         return null;
     }
 

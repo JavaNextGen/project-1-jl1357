@@ -29,7 +29,9 @@ public class UserDAO {
     
     		while(rs.next()) {
     			Role urole= Role.EMPLOYEE;
-	    		if(rs.getString("user_role")=="FINANCE_MANAGER") {
+	    		if(rs.getString("user_role").equals("FINANCE_MANAGER")) {
+	    			
+	    			System.out.println("in loop");
 	   				 urole = Role.FINANCE_MANAGER;
 	   			}
     			User nu = new User(
@@ -42,10 +44,11 @@ public class UserDAO {
     						rs.getString("user_email"),
     						rs.getInt("role_id_fk")
     					);
+    			
     			//System.out.println(rs.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
     			Optional<User> useroptional = Optional.ofNullable(nu);
-    			//System.out.println(useroptional);
+    			System.out.println(urole);
     			return useroptional;
     		}
     		//System.out.println(rs);
@@ -70,7 +73,7 @@ public class UserDAO {
     		
     		while(rs.next()) {
     			Role urole= Role.EMPLOYEE;
-    			if(rs.getString("user_role")=="FINANCE_MANAGER") {
+    			if(rs.getString("user_role").equals("FINANCE_MANAGER")) {
     				 urole = Role.FINANCE_MANAGER;
     			}
     			User nu = new User(
@@ -132,7 +135,7 @@ public class UserDAO {
     		while(rs2.next()) {
     			Role urole=Role.EMPLOYEE;
     			
-    			if(rs2.getString("user_role")=="FINANCE_MANAGER") {
+    			if(rs2.getString("user_role").equals("FINANCE_MANAGER")) {
     				 urole = Role.FINANCE_MANAGER;
     			}
     			userToBeRegistered=new User(
@@ -160,7 +163,7 @@ public class UserDAO {
     	}
         return null;
     }
-    public boolean uniquechecker(String username) {
+    public boolean usernamechecker(String username) {
     	try(Connection conn = ConnectionFactory.getConnection()){
     		ResultSet rs= null;
     		String sql = "SELECT * FROM ers_users where username = ?";
@@ -176,11 +179,90 @@ public class UserDAO {
     		//System.out.println(rs);
     				
     	} catch (SQLException e) {
-    		System.out.println("cant select byname");
+    		System.out.println("username incorrect");
     		e.printStackTrace();
     		
     	}
     	return true;
         
+    }
+    public User loginDAO(String username, String password) {
+    	try(Connection conn = ConnectionFactory.getConnection()){
+    		ResultSet rs= null;
+    		String sql = "SELECT * FROM ers_users WHERE (ers_users.username = ? and ers_users.\"password\" = ?);";
+    		PreparedStatement ps = conn.prepareStatement(sql);
+    		ps.setString(1, username);
+    		ps.setString(2, password);
+    		rs=ps.executeQuery();
+    		Role urole=Role.EMPLOYEE;
+    		User r = new User();
+    		while(rs.next()) {
+    			if(rs.getInt("role_id_fk")==2) {
+					urole=Role.FINANCE_MANAGER;
+				}
+    				User nu = new User(
+    						rs.getInt("user_id"),
+    						rs.getString("username"),
+    						rs.getString("password"),
+    						urole,
+    						rs.getString("user_lname"),
+    						rs.getString("user_fname"),
+    						rs.getString("user_email"),
+    						rs.getInt("role_id_fk")
+    					);
+    			r = nu;
+    		}
+    		
+    		return r;
+    				
+    	} catch (SQLException e) {
+    		System.out.println("password incorrect");
+    		e.printStackTrace();
+    		
+    	}
+    	return null;
+        
+    }
+public User getbyusername(String username) {
+    	
+    	try(Connection conn = ConnectionFactory.getConnection()){
+    		ResultSet rs= null;
+    		//String sql = "SELECT * FROM ers_users where user_id = ? ";
+    		String sql = "SELECT * FROM ers_users inner join ers_roles on ers_roles.role_id = ers_users.role_id_fk where username = ? ";
+    		PreparedStatement ps = conn.prepareStatement(sql);
+    		ps.setString(1, username);
+    		rs=ps.executeQuery();
+    		User resultuser = new User();
+    		
+    		while(rs.next()) {
+    			Role urole= Role.EMPLOYEE;
+    			if(rs.getString("user_role").equals("FINANCE_MANAGER")) {
+    				 urole = Role.FINANCE_MANAGER;
+    			}
+    			User nu = new User(
+    						rs.getInt("user_id"),
+    						rs.getString("username"),
+    						rs.getString("password"),
+    						urole,
+    						rs.getString("user_lname"),
+    						rs.getString("user_fname"),
+    						rs.getString("user_email"),
+    						rs.getInt("role_id_fk")
+    					);
+    			//System.out.println(rs.getInt("user_id"));
+    			//System.out.println(rs.getString("password"));
+    			resultuser=nu;
+    			//System.out.println(nu);
+    			
+    		}
+    		return resultuser;
+    		//System.out.println(rs);
+    				
+    	} catch (SQLException e) {
+    		System.out.println("cant select byname");
+    		e.printStackTrace();
+    		
+    	}
+        return null;
     }
 }
