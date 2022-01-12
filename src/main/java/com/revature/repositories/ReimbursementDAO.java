@@ -42,11 +42,13 @@ public class ReimbursementDAO {
 			rs=ps.executeQuery();
 			rs2=ps2.executeQuery();
 			rs3=ps3.executeQuery();
-			Status reimbStatus = Status.PENDING;
+			
     		List<Reimbursement> reimblist = new ArrayList<>();
     		
     		
     		while(rs.next()&rs2.next()&rs3.next()) {
+    			//System.out.println(rs3.getString("reimb_status"));
+    			Status reimbStatus = Status.PENDING;
     			if(rs3.getString("reimb_status").equals("Approved")) {
     				
    					reimbStatus = Status.APPROVED;
@@ -73,7 +75,7 @@ public class ReimbursementDAO {
 							rs.getInt("ers_reimb_type_fk")
     					);
     				reimblist.add(r);
-    				
+    				//System.out.println(reimbStatus);
     			}
     			//System.out.println(reimblist);
     		
@@ -406,9 +408,9 @@ public class ReimbursementDAO {
     		ResultSet rs= null;
     		ResultSet rs2= null;
     		ResultSet rs3= null;
-    		String sqlauth = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id";
-    		String sqlresl = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk";
-    		String sqlstat = "SELECT * FROM ers_reimb LEFT JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id";
+    		String sqlauth = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id ORDER BY reimb_id";
+    		String sqlresl = "SELECT * FROM ers_reimb LEFT JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk ORDER BY reimb_id";
+    		String sqlstat = "SELECT * FROM ers_reimb LEFT JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id ORDER BY reimb_id";
     		Statement ps = conn.createStatement();
     		Statement ps2 = conn.createStatement();
     		Statement ps3 = conn.createStatement();
@@ -427,6 +429,7 @@ public class ReimbursementDAO {
     			else if(rs3.getString("reimb_status").equals("Denied")) {
     				reimbStatus = Status.DENIED;
     			}
+    			System.out.println(reimbStatus);
     			User auth = us.getbyUserid(rs.getInt("user_id"));
     			User resl = us.getbyUserid(rs2.getInt("user_id"));
     			Reimbursement r = new Reimbursement(

@@ -42,7 +42,7 @@ public class UserServiceTest {
         when(userDAO.getByUsername(anyString())).thenReturn(Optional.of(GENERIC_EMPLOYEE_1));
 
         assertEquals(Optional.of(GENERIC_EMPLOYEE_1), userService.getByUsername(GENERIC_EMPLOYEE_1.getUsername()));
-
-        verify(userDAO).getByUsername(GENERIC_EMPLOYEE_1.getUsername());
+        
+        //verify(userDAO).getByUsername(GENERIC_EMPLOYEE_1.getUsername());
     }
 }
