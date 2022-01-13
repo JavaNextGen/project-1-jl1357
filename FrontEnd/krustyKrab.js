@@ -6,7 +6,7 @@ const url = "http://localhost:3001/" //putting our base URL in a variable for cl
 document.getElementById("loginButton").addEventListener("click", loginFunction);
 //document.getElementById("regButton").addEventListener("click", regFunction);
 
-
+document.getElementById('tableandbutton').style.visibility = 'hidden';
 //remember, async returns a promise (which fetch request return)
 async function getAllReimb() {
     $("#employeeBody").empty();
@@ -270,6 +270,7 @@ async function loginFunction() {
         window.localStorage.getItem('data2');
         //export {data2};
             if(data2.role==="FINANCE_MANAGER"){
+                document.getElementById('tableandbutton').style.visibility = 'visible';
                 document.getElementById("loginRow").innerText="Welcome! Finance Manager "+ data2.user_fname+data2.user_lname+" ur id is "+ data2.id;
                 document.getElementById("getEmployeeButton").addEventListener("click", getAllReimb);
                 document.getElementById("approved").addEventListener("click", function(){getReimbByStatus(1)});
@@ -277,6 +278,7 @@ async function loginFunction() {
                 document.getElementById("denied").addEventListener("click", function(){getReimbByStatus(3)});
             }
             else{
+                document.getElementById('tableandbutton').style.visibility = 'visible';
                 document.getElementById("loginRow").innerText="Welcome! Employee "+ data2.user_fname+data2.user_lname+" ur id is "+ data2.id;
                 document.getElementById("getEmployeeButton").addEventListener("click", function(){getuserReimb(data2.id)});
                 document.getElementById('showbystatus').style.visibility = 'hidden';
