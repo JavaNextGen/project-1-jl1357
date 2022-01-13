@@ -53,12 +53,12 @@ public class ReimbursementService {
 	}
     public Reimbursement process(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
     	Reimbursement reimb=rDAO.update(unprocessedReimbursement,finalStatus,resolver);
-        return null;
+        return reimb;
     }
-//    public List<Reimbursement> getAllReimb(){
-//    	List<Reimbursement> reimblist=rDAO.getAllReimb();
-//    	return reimblist;
-//    }
+    public Reimbursement updatereimb(int rid, int r_status_fk, int resl_id) {
+    	Reimbursement reimb=rDAO.updatereimb(rid,r_status_fk,resl_id);
+        return reimb;
+    }
     public List<Reimbursement> getAllReimbUser(int idinput){
     	List<Reimbursement> reimblist=rDAO.getAllReimbUser(idinput);
     	return reimblist;

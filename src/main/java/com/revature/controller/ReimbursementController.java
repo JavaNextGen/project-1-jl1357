@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.google.gson.Gson;
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
+import com.revature.models.updateDTO;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
 import com.revature.models.Status;
@@ -29,22 +30,22 @@ public class ReimbursementController {
 		}
 		
 	};
-public Handler addNewReimb = (ctx) -> {
-		
-		if(ctx.req.getSession() != null) {
+	public Handler addNewReimb = (ctx) -> {
 			
-			String body = ctx.body();
-			Gson gson = new Gson();
-			Reimbursement reimb = gson.fromJson(body, Reimbursement.class);
-			rs.createReimb(reimb);
-			ctx.result("created reimb");
-			ctx.status(200);
-		}else {
-			ctx.result("failed");
-			ctx.status(404);
-		}
-		
-	};
+			if(ctx.req.getSession() != null) {
+				
+				String body = ctx.body();
+				Gson gson = new Gson();
+				Reimbursement reimb = gson.fromJson(body, Reimbursement.class);
+				rs.createReimb(reimb);
+				ctx.result("created reimb");
+				ctx.status(200);
+			}else {
+				ctx.result("failed");
+				ctx.status(404);
+			}
+			
+		};
 	public Handler getAllReimbController = (ctx) -> {
 		if(ctx.req.getSession() != null) {
 			List<Reimbursement> reimbresult = rs.getAllReimb();
@@ -76,6 +77,22 @@ public Handler addNewReimb = (ctx) -> {
 			String JSONreimb = gson.toJson(reimbresult);
 			
 			ctx.result(JSONreimb);
+			ctx.status(200);
+		}else {
+			ctx.result("failed");
+			ctx.status(404);
+		}
+		
+	};
+	public Handler updatereimbController = (ctx) -> {
+		
+		if(ctx.req.getSession() != null) {
+			
+			String body = ctx.body();
+			Gson gson = new Gson();
+			updateDTO UDTO = gson.fromJson(body, updateDTO.class);
+			rs.updatereimb(UDTO.getRid(),UDTO.getR_status_fk(),UDTO.getResl_id());
+			ctx.result("created reimb");
 			ctx.status(200);
 		}else {
 			ctx.result("failed");

@@ -176,6 +176,7 @@ public class Menu {
 				Status s1=Status.valueOf(str);
 				Reimbursement r1=rs.getById2(reimbid);
 				Reimbursement r2=rs.process(r1,s1,checker);
+				System.out.println(r2);
 				//Reimbursement r3=rs.update(r2);
 				break;
 			}

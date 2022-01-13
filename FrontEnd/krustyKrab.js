@@ -264,17 +264,24 @@ async function loginFunction() {
         let data2 = await response2.json();
         console.log(data2);
         
-        document.getElementById("loginRow").innerText="Welcome!";
+        
         console.log(data2.role);
+        window.localStorage.setItem('data2', JSON.stringify(data2));
+        window.localStorage.getItem('data2');
         //export {data2};
             if(data2.role==="FINANCE_MANAGER"){
+                document.getElementById("loginRow").innerText="Welcome! Finance Manager "+ data2.user_fname+data2.user_lname;
                 document.getElementById("getEmployeeButton").addEventListener("click", getAllReimb);
                 document.getElementById("approved").addEventListener("click", function(){getReimbByStatus(1)});
                 document.getElementById("pending").addEventListener("click", function(){getReimbByStatus(2)});
                 document.getElementById("denied").addEventListener("click", function(){getReimbByStatus(3)});
             }
             else{
+                document.getElementById("loginRow").innerText="Welcome! Employee "+ data2.user_fname+data2.user_lname;
                 document.getElementById("getEmployeeButton").addEventListener("click", function(){getuserReimb(data2.id)});
+                document.getElementById('showbystatus').style.visibility = 'hidden';
+                document.getElementById('update').style.visibility = 'hidden';
+                
                 //document.getElementById("getEmployeeButton").innerHTML="ucant";
             }
         

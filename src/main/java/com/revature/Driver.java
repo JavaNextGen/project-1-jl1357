@@ -47,6 +47,8 @@ public class Driver {
     	//1 approved, 2 pending, 3 denied
     	app.get("/reimbfilter/{reimb_status_id}", rc.getByStatsController);
     	app.post("/login",ac.loginHandler);
+    	//update
+    	app.post("/reimbupdate", rc.updatereimbController);
     	
     }
 }

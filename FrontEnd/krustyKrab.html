@@ -61,19 +61,25 @@
 
 			<button id="getEmployeeButton" class="btn btn-primary">Show All Reimbursement</button>
 			<button id="submitButton" class="btn btn-primary col-sm-4" onclick= "window.open('reimbSubmit.html', 'SampleWindow', 'WIDTH=300,HEIGHT=250')">Submit New Reimbursement</button>
-			<div>
+			<div id="showbystatus">
 				<h4>choose status</h4>
-			<div class="btn btn-primary">
+			<div  class="btn btn-primary">
 				
 				<button id="pending" class="btn-primary">Pending</button>
 				<button id="approved" class="btn-primary">Approved</button>
 				<button id="denied" class="btn-primary">Denied</button>
-			  </div>
+			</div>
+			</div>
+			<br>
+			<div id="update">
+				<button id="update" class="btn btn-primary" onclick= "window.open('updatereimb.html', 'SampleWindow', 'WIDTH=300,HEIGHT=250')">Update Reimbursement</button>
+
 			</div>
 		</div>
 
 	</div>
 
 		<script src="krustyKrab.js"></script>
+		
 	</body>
 </html>

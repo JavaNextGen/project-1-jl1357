@@ -157,9 +157,9 @@ public class ReimbursementDAO {
     		ResultSet rs= null;
     		ResultSet rs2= null;
     		ResultSet rs3= null;
-    		String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
-    		String sqlresl = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk WHERE ers_reimb.reimb_id =?";
-    		String sqlstat = "SELECT * FROM ers_reimb INNER JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id WHERE ers_reimb.reimb_id =?";
+    		String sqlauth = "SELECT * FROM ers_reimb left JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
+    		String sqlresl = "SELECT * FROM ers_reimb left JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk WHERE ers_reimb.reimb_id =?";
+    		String sqlstat = "SELECT * FROM ers_reimb left JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id WHERE ers_reimb.reimb_id =?";
     		PreparedStatement ps = conn.prepareStatement(sqlauth);
     		PreparedStatement ps2 = conn.prepareStatement(sqlresl);
     		PreparedStatement ps3 = conn.prepareStatement(sqlstat);
@@ -216,9 +216,10 @@ public class ReimbursementDAO {
     					);
     			
     			System.out.println(nr);*/
-    			System.out.println(nr);
+    			//System.out.println(nr);
     			return nr;
     		}
+    		
     		//System.out.println(rs);
     				
     	} catch (SQLException e) {
@@ -300,18 +301,19 @@ public class ReimbursementDAO {
      */
     public Reimbursement update(Reimbursement unprocessedReimbursement, Status finalStatus, User resolver) {
     		int id = unprocessedReimbursement.getId();
-    		int reslvr = unprocessedReimbursement.getErs_users_fk_reslver();
-    		int stat=1;
+    		int reslvr = resolver.getId();
+    		int stat=2;
     		if (finalStatus.toString().equals("Pending")) {
-    			stat=1;
+    			stat=2;
     		}
     		else if (finalStatus.toString().equals("Approved")) {
-    			stat=2;
+    			stat=1;
     		}
     		else if (finalStatus.toString().equals("Denied")) {
     			stat=3;
     		}
-    		
+    		System.out.println(reslvr);
+    		System.out.println(stat);
     	try(Connection conn = ConnectionFactory.getConnection()){
     		
     		ResultSet rs= null;
@@ -321,7 +323,7 @@ public class ReimbursementDAO {
     		ps.setInt(2, reslvr);
     		ps.setInt(3, id);
     		ps.executeUpdate();
-    		String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
+    		String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
     		//String sqlresl = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr = ers_users.role_id_fk WHERE ers_reimb.reimb_id =?";
     		//String sqlstat = "SELECT * FROM ers_reimb INNER JOIN ers_reimb_status ON ers_reimb.ers_reimb_status_fk = ers_reimb_status.reimb_status_id WHERE ers_reimb.reimb_id =?";
     		PreparedStatement ps2 = conn.prepareStatement(sqlauth);
@@ -497,4 +499,66 @@ public class ReimbursementDAO {
 //	}
 //	return null;
 //}
+    public Reimbursement updatereimb(int rid, int r_status_fk, int resl_id) {
+	try(Connection conn = ConnectionFactory.getConnection()){
+		Status finalstatus=Status.PENDING;
+		if(r_status_fk==1) {
+			finalstatus=Status.APPROVED;
+		}
+		else if(r_status_fk==3) {
+			finalstatus=Status.DENIED;
+		}
+		ResultSet rs= null;
+		String sql = "UPDATE ers_reimb SET ers_reimb_status_fk = ?, ers_users_fk_reslvr = ? WHERE reimb_id =? ";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, r_status_fk);
+		ps.setInt(2, resl_id);
+		ps.setInt(3, rid);
+		ps.executeUpdate();
+		String sqlreimb = "SELECT * FROM ers_reimb WHERE ers_reimb.reimb_id =?";
+		String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
+		String sqlresl = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
+		PreparedStatement ps2 = conn.prepareStatement(sqlauth);
+		PreparedStatement ps3 = conn.prepareStatement(sqlresl);
+		PreparedStatement ps4 = conn.prepareStatement(sqlresl);
+		
+		ps2.setInt(1, rid);
+		ps3.setInt(1, rid);
+		ps4.setInt(1, rid);
+		ResultSet rs2= null;
+		ResultSet rs3= null;
+		ResultSet rs4= null;
+		rs2=ps2.executeQuery();
+		rs3=ps3.executeQuery();
+		rs4=ps4.executeQuery();
+		while(rs2.next()&rs3.next()&rs4.next()) {
+			User auth = us.getbyUserid(rs2.getInt("user_id"));
+			User resl = us.getbyUserid(rs3.getInt("user_id"));
+			Reimbursement nr = new Reimbursement(
+					rid,
+					finalstatus,
+					auth,
+					resl,
+					rs4.getDouble("reimb_amount"),
+					rs4.getString("reimb_description"),
+					rs4.getInt("ers_users_fk_auth"),
+					rs4.getInt("ers_users_fk_reslvr"),
+					rs4.getInt("ers_reimb_status_fk"),
+					rs4.getInt("ers_reimb_type_fk")
+					);
+			
+			System.out.println(nr);
+			return nr;
+		}
+
+		
+		//System.out.println(rs);
+				
+	} catch (SQLException e) {
+		System.out.println("getbystatus failed");
+		e.printStackTrace();
+		
+	}
+	return null;
+}
 }
