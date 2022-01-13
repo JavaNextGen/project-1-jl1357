@@ -2,7 +2,7 @@ package com.revature;
 import com.revature.controller.AuthController;
 import com.revature.controller.ReimbursementController;
 import com.revature.controller.UserController;
-import com.revature.models.Menu;
+//import com.revature.models.Menu;
 import java.sql.Connection;
 import java.sql.SQLException;
 import io.javalin.Javalin;

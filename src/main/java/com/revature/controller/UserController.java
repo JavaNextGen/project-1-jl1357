@@ -21,7 +21,7 @@ public class UserController {
 			//System.out.println(userresult);
 			Gson gson = new Gson();
 			String JSONUser = gson.toJson(userresult);
-			System.out.println(userresult);
+			//System.out.println(userresult);
 			ctx.result(JSONUser);
 			ctx.status(200);
 		}else {

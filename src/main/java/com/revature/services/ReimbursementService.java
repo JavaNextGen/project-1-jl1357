@@ -5,7 +5,7 @@ import com.revature.models.Status;
 import com.revature.models.User;
 import com.revature.repositories.ReimbursementDAO;
 
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +69,7 @@ public class ReimbursementService {
 //    }
     public Reimbursement createReimb(Reimbursement unprocessedReimbursement) {
     	Reimbursement reimb=rDAO.createReimb(unprocessedReimbursement);
-        return null;
+        return reimb;
     }
     public List<Reimbursement> getAllReimb() {
     	List<Reimbursement> reimbstatus = rDAO.getAllReimb();

@@ -1,7 +1,7 @@
 package com.revature.repositories;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.Role;
+
 import com.revature.models.Status;
 import com.revature.models.User;
 import com.revature.services.UserService;
@@ -83,7 +83,7 @@ public class ReimbursementDAO {
     		
     				
     	} catch (SQLException e) {
-    		System.out.println("getbystatus failed");
+    		System.out.println("get all reimb failed");
     		e.printStackTrace();
     		
     	}
@@ -139,7 +139,7 @@ public class ReimbursementDAO {
 							rs.getInt("ers_reimb_type_fk")
     					);
     			Optional<Reimbursement> Reimbursementoptional = Optional.ofNullable(nr);
-    			System.out.println(Reimbursementoptional);
+    			//System.out.println(Reimbursementoptional);
     		return Reimbursementoptional;}
     		
     		//System.out.println(rs);
@@ -316,7 +316,7 @@ public class ReimbursementDAO {
     		System.out.println(stat);
     	try(Connection conn = ConnectionFactory.getConnection()){
     		
-    		ResultSet rs= null;
+    		//ResultSet rs= null;
     		String sql = "UPDATE ers_reimb SET ers_reimb_status_fk = ?, ers_users_fk_reslvr = ? WHERE reimb_id =? ";
     		PreparedStatement ps = conn.prepareStatement(sql);
     		ps.setInt(1, stat);
@@ -508,14 +508,14 @@ public class ReimbursementDAO {
 		else if(r_status_fk==3) {
 			finalstatus=Status.DENIED;
 		}
-		ResultSet rs= null;
+		//ResultSet rs= null;
 		String sql = "UPDATE ers_reimb SET ers_reimb_status_fk = ?, ers_users_fk_reslvr = ? WHERE reimb_id =? ";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, r_status_fk);
 		ps.setInt(2, resl_id);
 		ps.setInt(3, rid);
 		ps.executeUpdate();
-		String sqlreimb = "SELECT * FROM ers_reimb WHERE ers_reimb.reimb_id =?";
+		//String sqlreimb = "SELECT * FROM ers_reimb WHERE ers_reimb.reimb_id =?";
 		String sqlauth = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_auth  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
 		String sqlresl = "SELECT * FROM ers_reimb INNER JOIN ers_users ON ers_reimb.ers_users_fk_reslvr  = ers_users.user_id WHERE ers_reimb.reimb_id =?";
 		PreparedStatement ps2 = conn.prepareStatement(sqlauth);
@@ -547,7 +547,7 @@ public class ReimbursementDAO {
 					rs4.getInt("ers_reimb_type_fk")
 					);
 			
-			System.out.println(nr);
+			//System.out.println(nr);
 			return nr;
 		}
 

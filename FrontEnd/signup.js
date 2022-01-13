@@ -27,6 +27,7 @@ async function signupfunction() {
         user_email:email,
         role_id_fk:idfk,
         id:id
+        
     }
     //This object will reflect our DTO in Java... This is the data we want to transfer!
 

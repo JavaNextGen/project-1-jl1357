@@ -31,7 +31,7 @@ public class UserDAO {
     			Role urole= Role.EMPLOYEE;
 	    		if(rs.getString("user_role").equals("FINANCE_MANAGER")) {
 	    			
-	    			System.out.println("in loop");
+	    			//System.out.println("in loop");
 	   				 urole = Role.FINANCE_MANAGER;
 	   			}
     			User nu = new User(
@@ -48,7 +48,7 @@ public class UserDAO {
     			//System.out.println(rs.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
     			Optional<User> useroptional = Optional.ofNullable(nu);
-    			System.out.println(urole);
+    			//System.out.println(urole);
     			return useroptional;
     		}
     		//System.out.println(rs);
@@ -96,7 +96,7 @@ public class UserDAO {
     		//System.out.println(rs);
     				
     	} catch (SQLException e) {
-    		System.out.println("cant select byname");
+    		System.out.println("cant select by user id");
     		e.printStackTrace();
     		
     	}
@@ -151,7 +151,7 @@ public class UserDAO {
     					);
     			//System.out.println(rs2.getInt("user_id"));
     			//System.out.println(rs.getString("password"));
-    			System.out.println(userToBeRegistered);
+    			//System.out.println(userToBeRegistered);
     			
     			return userToBeRegistered;
     		}
@@ -260,7 +260,7 @@ public User getbyusername(String username) {
     		//System.out.println(rs);
     				
     	} catch (SQLException e) {
-    		System.out.println("cant select byname");
+    		System.out.println("cant select by username");
     		e.printStackTrace();
     		
     	}

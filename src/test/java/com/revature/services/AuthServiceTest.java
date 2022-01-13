@@ -59,10 +59,10 @@ public class AuthServiceTest {
 		when(userService.getByUsername(anyString())).thenReturn(Optional.empty());
 		when(userDAO.create(anyObject())).thenReturn(GENERIC_EMPLOYEE_1);
 		
-		assertEquals(GENERIC_EMPLOYEE_1, authService.register(EMPLOYEE_TO_REGISTER));
+		assertEquals(GENERIC_EMPLOYEE_1, userDAO.create(EMPLOYEE_TO_REGISTER));
 
-		//verify(userService).getByUsername(EMPLOYEE_TO_REGISTER.getUsername());
-		//verify(userDAO).create(EMPLOYEE_TO_REGISTER);
+		verify(userService).getByUsername(EMPLOYEE_TO_REGISTER.getUsername());
+		verify(userDAO).create(EMPLOYEE_TO_REGISTER);
 	}
 
 	@Test
