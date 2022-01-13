@@ -4,7 +4,6 @@ document.getElementById("submit").addEventListener("click", submitfunction);
 async function submitfunction() {
 
     //gather the user inputs from the login inputs
-    let rid = document.getElementById("id").value;
     let amount = document.getElementById("amount").value;
     let type = document.getElementById("type").value;
     let auth = document.getElementById("auth").value;
@@ -25,7 +24,6 @@ async function submitfunction() {
     
     //we want to send the user/pass as JSON, so we need a JS object to send
     let reimb = {
-        id:rid,
         amount:amount,
         ers_reimb_type_fk:typefk,
         ers_reimb_status_fk : 2,

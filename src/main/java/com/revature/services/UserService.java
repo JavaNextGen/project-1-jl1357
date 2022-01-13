@@ -37,6 +37,9 @@ public class UserService {
 	public boolean usernamechecker(String username){
 		return uDAO.usernamechecker(username);
 	}
+	public boolean emailchecker(String useremail){
+		return uDAO.emailchecker(useremail);
+	}
 	public User create(User userToBeRegistered) {
 		User usertocreate=uDAO.create(userToBeRegistered);
 		return usertocreate;
@@ -44,4 +47,5 @@ public class UserService {
 	public User getbyusername(String username){
 		return uDAO.getbyusername(username);
 	}
+
 }

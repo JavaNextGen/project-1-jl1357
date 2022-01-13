@@ -117,16 +117,16 @@ public class UserDAO {
     	try(Connection conn = ConnectionFactory.getConnection()){
     		//System.out.println("ur here");
     		
-    		String sql = "INSERT INTO ers_users(user_id, username,PASSWORD,user_lname,user_fname,user_email,role_id_fk) VALUES (?,?,?,?,?,?,?)";
+    		String sql = "INSERT INTO ers_users( username,PASSWORD,user_lname,user_fname,user_email,role_id_fk) VALUES (?,?,?,?,?,?)";
     		PreparedStatement ps = conn.prepareStatement(sql);
-    		ps.setInt(1, userToBeRegistered.getId());
+    		//ps.setInt(1, userToBeRegistered.getId());
     		//System.out.println(userToBeRegistered.getId());
-    		ps.setString(2, userToBeRegistered.getUsername());
-    		ps.setString(3, userToBeRegistered.getPassword());
-    		ps.setString(4, userToBeRegistered.getUser_lname());
-    		ps.setString(5, userToBeRegistered.getUser_fname());
-    		ps.setString(6, userToBeRegistered.getUser_email());
-    		ps.setInt(7, userToBeRegistered.getRole_id_fk());
+    		ps.setString(1, userToBeRegistered.getUsername());
+    		ps.setString(2, userToBeRegistered.getPassword());
+    		ps.setString(3, userToBeRegistered.getUser_lname());
+    		ps.setString(4, userToBeRegistered.getUser_fname());
+    		ps.setString(5, userToBeRegistered.getUser_email());
+    		ps.setInt(6, userToBeRegistered.getRole_id_fk());
     		ps.executeUpdate();
     		ResultSet rs2=null;
     		String sql2="SELECT * FROM ers_users inner join ers_roles on ers_roles.role_id = ers_users.role_id_fk WHERE user_id = ?";
@@ -171,16 +171,39 @@ public class UserDAO {
     		PreparedStatement ps = conn.prepareStatement(sql);
     		ps.setString(1, username);
     		rs=ps.executeQuery();
-    		if(rs == null) {
-    			return true;
+    		if(rs.next()) {
+    			return false;
     		}
     		else {
-    			return false;
+    			return true;
     		}
     		//System.out.println(rs);
     				
     	} catch (SQLException e) {
     		System.out.println("username incorrect");
+    		e.printStackTrace();
+    		
+    	}
+    	return true;
+        
+    }
+    public boolean emailchecker(String useremail) {
+    	try(Connection conn = ConnectionFactory.getConnection()){
+    		ResultSet rs= null;
+    		String sql = "SELECT * FROM ers_users where user_email = ?";
+    		PreparedStatement ps = conn.prepareStatement(sql);
+    		ps.setString(1, useremail);
+    		rs=ps.executeQuery();
+    		if(rs.next()) {
+    			return false;
+    		}
+    		else {
+    			return true;
+    		}
+    		//System.out.println(rs);
+    				
+    	} catch (SQLException e) {
+    		System.out.println("email incorrect");
     		e.printStackTrace();
     		
     	}

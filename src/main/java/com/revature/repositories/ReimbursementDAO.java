@@ -381,16 +381,16 @@ public class ReimbursementDAO {
 	try(Connection conn = ConnectionFactory.getConnection()){
 		
 		
-		String sql = "INSERT INTO ers_reimb(reimb_id, reimb_amount,reimb_description,ers_users_fk_auth,ers_reimb_status_fk,ers_reimb_type_fk) VALUES (?,?,?,?,?,?);";
+		String sql = "INSERT INTO ers_reimb(reimb_amount,reimb_description,ers_users_fk_auth,ers_reimb_status_fk,ers_reimb_type_fk) VALUES (?,?,?,?,?);";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt(1, unprocessedReimbursement.getId());
-		ps.setDouble(2, unprocessedReimbursement.getAmount());
+		//ps.setInt(1, unprocessedReimbursement.getId());
+		ps.setDouble(1, unprocessedReimbursement.getAmount());
 		//ps.setTimestamp(3, unprocessedReimbursement.getSubmitted());
 		//ps.setTimestamp(3, unprocessedReimbursement.getSubmitted());
-		ps.setString(3, unprocessedReimbursement.getReimb_description());
-		ps.setInt(4, unprocessedReimbursement.getErs_users_fk_auth());
-		ps.setInt(5, unprocessedReimbursement.getErs_reimb_status_fk());
-		ps.setInt(6, unprocessedReimbursement.getErs_reimb_type_fk());
+		ps.setString(2, unprocessedReimbursement.getReimb_description());
+		ps.setInt(3, unprocessedReimbursement.getErs_users_fk_auth());
+		ps.setInt(4, unprocessedReimbursement.getErs_reimb_status_fk());
+		ps.setInt(5, unprocessedReimbursement.getErs_reimb_type_fk());
 		ps.executeUpdate();
 		
 

@@ -81,5 +81,54 @@ public class UserController {
 		}
 		
 	};
+	public Handler usernamechecker = (ctx) -> {
+		String username;
+		username = ctx.pathParam("username");
+		//username = Integer.parseInt(ctx.pathParam("username"));
+		if(ctx.req.getSession() != null) {
+			boolean userresult = us.usernamechecker(username);
+			
+			if(userresult == true) {
+				Gson gson = new Gson();
+				String JSONUser = gson.toJson(userresult);
+				ctx.result(JSONUser);
+				ctx.status(201);
+			}
+			else {
+				Gson gson = new Gson();
+				String JSONUser = gson.toJson(userresult);
+				ctx.result(JSONUser);
+				ctx.status(202);
+			}
+		}else {
+			ctx.result("failed");
+			ctx.status(404);
+		}
+		
+	};
+	public Handler emailchecker = (ctx) -> {
+		String email;
+		email = ctx.pathParam("user_email");
+		//username = Integer.parseInt(ctx.pathParam("username"));
+		if(ctx.req.getSession() != null) {
+			boolean userresult = us.emailchecker(email);
+			if(userresult == true) {
+				Gson gson = new Gson();
+				String JSONUser = gson.toJson(userresult);
+				ctx.result(JSONUser);
+				ctx.status(201);
+			}
+			else {
+				Gson gson = new Gson();
+				String JSONUser = gson.toJson(userresult);
+				ctx.result(JSONUser);
+				ctx.status(202);
+			}
+		}else {
+			ctx.result("failed");
+			ctx.status(404);
+		}
+		
+	};
 	
 }

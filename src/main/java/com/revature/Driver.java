@@ -31,6 +31,8 @@ public class Driver {
 			).start(3001);
     	//get user by id
     	app.get("/user/{user_id}", uc.getUserByIdController);
+    	app.get("/usernamechecker/{username}", uc.usernamechecker);
+    	app.get("/emailchecker/{user_email}", uc.emailchecker);
     	//create new user
     	app.post("/user", uc.updateNewUser);
     	//get user by username
