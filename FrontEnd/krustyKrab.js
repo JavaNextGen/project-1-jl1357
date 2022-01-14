@@ -152,7 +152,7 @@ async function getReimbByStatus(id) {
 
 }
 async function getuserReimb(id) {
-
+    $("#employeeBody").empty();
     //we will send a fetch request to get our employee data
     //by default, fetch requests send GET requests
     //let response = await fetch(url + "employee");
