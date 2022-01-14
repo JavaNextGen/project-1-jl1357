@@ -16,7 +16,11 @@
             <input id="fname" placeholder="Fisrt Name" class="col-sm-4" />
             <input id="lname" placeholder="Last Name" class="col-sm-4" />
             <input id="email" placeholder="email" class="col-sm-4" />
-            <input id="role" placeholder="Role (all captial)" class="col-sm-4" />
+            <input list="list of roles" id="role">
+            <datalist id="list of roles">
+            <option value="EMPLOYEE">
+            <option value="FINANCE_MANAGER">
+            </datalist>
             <button id="signup" class="btn btn-primary col-sm-4" >sign up</button>
         </div>
         <script src="signup.js"></script>

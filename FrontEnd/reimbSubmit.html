@@ -10,7 +10,13 @@
     <div id="submitrow" class="row">
         <h3>Please Enter your Reimbursement Information!</h3>
         <input id="amount" placeholder="amount" class="col-sm-4" />
-        <input id="type" placeholder="type" class="col-sm-4" />
+        <input list="list of type" id="type">
+            <datalist id="list of type">
+            <option value="lodgin">
+            <option value="travel">
+            <option value="food"> 
+            <option value="other">
+            </datalist>
         <input id="auth" placeholder="your id" class="col-sm-4" />
         <!--<input id="status" placeholder="enter status" class="col-sm-4" /> -->
         <textarea id="desc" rows="4" cols="30" placeholder="Write your description"></textarea>
